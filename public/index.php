@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 use Phalcon\Db\Adapter\Pdo\Mysql as Database;
+use Phalcon\Http\Response\Cookies;
 
 class Application extends \Phalcon\Mvc\Application
 {
@@ -56,9 +57,15 @@ class Application extends \Phalcon\Mvc\Application
             ));
         });
 
-        $di->set('config', function () use ($config) {
-           return $config;
+        $di->set('cookies', function () {
+            $cookies = new Cookies();
+            $cookies->useEncryption(false);
+            return $cookies;
         });
+
+        $di->set('config', function () use ($config) {
+        return $config;
+    });
 
         $this->setDI($di);
     }

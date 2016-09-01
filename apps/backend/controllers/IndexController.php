@@ -16,8 +16,13 @@ class IndexController extends \Phalcon\Mvc\Controller
 
 
     function loginAction() {
-        echo __METHOD__;
-    }
 
+        if(!empty($_POST)) {
+            $this->cookies->set('user', 'tien dinh', time()+9999);
+            var_dump($this->cookies->has('user'));
+            die();
+        }
+
+    }
 }
 
