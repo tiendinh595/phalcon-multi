@@ -14,5 +14,10 @@ class IndexController extends \Phalcon\Mvc\Controller
         $this->view->disable();
     }
 
+
+    function loginAction() {
+        echo __METHOD__;
+    }
+
 }
 

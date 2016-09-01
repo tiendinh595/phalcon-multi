@@ -26,20 +26,21 @@ class Application extends \Phalcon\Mvc\Application
 
         //Registering a router
         $di->set('router', function(){
-
             $router = new \Phalcon\Mvc\Router();
-
             $router->setDefaultModule("frontend");
-
+            $router->add('/:module/:controller', array(
+                'module' => 1,
+                'controller' => 2,
+                'action' => 'index',
+            ));
             $router->add('/:module/:controller/:action', array(
                 'module' => 1,
                 'controller' => 2,
                 'action' => 3,
             ));
-
-
+            require_once __DIR__ . "../../apps/backend/router.php";
+            require_once __DIR__ . "../../apps/frontend/router.php";
             return $router;
-
         });
         /**
          * Read configuration
@@ -89,12 +90,9 @@ class Application extends \Phalcon\Mvc\Application
  */
 //require __DIR__ . '../../vendor/autoload.php';
 
-    // Settings Tracy Debugger
 $debug = new \Phalcon\Debug();
 $debug->listen();
 
-/**
- * START APPLICATION
- */
+
 $application = new Application();
 $application->main();
