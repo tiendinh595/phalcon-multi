@@ -44,7 +44,7 @@ class Application extends \Phalcon\Mvc\Application
         /**
          * Read configuration
          */
-        $config = require_once __DIR__ . "../../config/database.php";
+        $config = require_once __DIR__ . "../../apps/config.php";
 
         $di->set('db', function () use ($config) {
             return new Database(array(
@@ -92,8 +92,6 @@ class Application extends \Phalcon\Mvc\Application
     // Settings Tracy Debugger
 $debug = new \Phalcon\Debug();
 $debug->listen();
-
-
 
 /**
  * START APPLICATION
