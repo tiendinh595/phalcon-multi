@@ -29,6 +29,8 @@ class Application extends \Phalcon\Mvc\Application
         $di->set('router', function(){
             $router = new \Phalcon\Mvc\Router();
             $router->setDefaultModule("frontend");
+            require_once __DIR__ . "../../apps/backend/router.php";
+            require_once __DIR__ . "../../apps/frontend/router.php";
             $router->add('/:module/:controller', array(
                 'module' => 1,
                 'controller' => 2,
@@ -39,10 +41,17 @@ class Application extends \Phalcon\Mvc\Application
                 'controller' => 2,
                 'action' => 3,
             ));
-            require_once __DIR__ . "../../apps/backend/router.php";
-            require_once __DIR__ . "../../apps/frontend/router.php";
+            $router->add('/:module/:controller/:action/:params', array(
+                'module' => 1,
+                'controller' => 2,
+                'action' => 3,
+                'params' => 4,
+            ));
+
             return $router;
         });
+
+        require_once __DIR__ . "../../apps/loader.php";
         /**
          * Read configuration
          */
